@@ -7,10 +7,12 @@ When a listItem(repository) is selected, a card pops up with information about t
 The App is build based on MVVM architecture
 
 External Libs Used :
+
 1. Retrofit for network calls
 2. Picasso for image loading
 
-Things under progress
+Things under progress:
+
 Unit Testing
 
 
