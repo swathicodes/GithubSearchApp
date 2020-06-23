@@ -2,6 +2,7 @@ package com.swathi.githubapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ContextThemeWrapper;
+import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,6 +21,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
@@ -37,11 +39,13 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
-    private MainActivityViewModel mainActivityViewModel;
+    @VisibleForTesting
+    MainActivityViewModel mainActivityViewModel;
 
     private Button searchBtn;
     private EditText useridSearchET;
     private ImageView userImage;
+    private TextView userNameTV;
     private RecyclerView recyclerView;
     private RepoAdapter repoAdapter;
     private ProgressBar progressBar_loadImage, progressBar_repoList;
@@ -80,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateUserReposList(UserRepos userReposItems) {
         progressBar_repoList.setVisibility(View.GONE);
-        if (userReposItems == null){
+        if (userReposItems == null) {
             Toast.makeText(this, "Error in fetching user Repositories", Toast.LENGTH_LONG).show();
             return;
         }
@@ -89,11 +93,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateUserDetails(UserDetails userDetails) {
         progressBar_loadImage.setVisibility(View.GONE);
-        if (userDetails == null){
+        if (userDetails == null) {
             Toast.makeText(this, "Error in fetching Avatar", Toast.LENGTH_LONG).show();
             return;
         }
         Picasso.get().load(userDetails.getAvatar_url()).into(userImage);
+        userNameTV.setText(userDetails.getName());
 
     }
 
@@ -102,8 +107,8 @@ public class MainActivity extends AppCompatActivity {
         searchBtn.setOnClickListener(v -> {
 
             String userId = useridSearchET.getText().toString();
-            if (userId.equals("") || userId.isEmpty()){
-                Toast.makeText(MainActivity.this, "Please enter a valid Github user Id", Toast.LENGTH_LONG).show();
+            if (userId.equals("") || userId.isEmpty()) {
+                Toast.makeText(MainActivity.this,  R.string.invalid_user, Toast.LENGTH_LONG).show();
                 return;
             }
             View view = this.getCurrentFocus();
@@ -127,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
         userImage = findViewById(R.id.userImgView);
         progressBar_loadImage = findViewById(R.id.progressbar_loadImage);
         progressBar_repoList = findViewById(R.id.progressbar_repoList);
+        userNameTV = findViewById(R.id.tv_userName);
     }
 
     private void initializeRecyclerView() {
