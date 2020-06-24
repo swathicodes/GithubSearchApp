@@ -99,9 +99,9 @@ public class MainActivityInstrumentedTest {
 
         // Check that details in the dialog match the clicked item in the list
         UserReposItem userRepo = userReposItems.get(0);
-        onView(withId(R.id.last_updated)).check(matches(withText(userRepo.getUpdated_at())));
-        onView(withId(R.id.tv_stars)).check(matches(withText(String.valueOf(userRepo.getStargazers_count()))));
-        onView(withId(R.id.tv_forks)).check(matches(withText(String.valueOf(userRepo.getForks_count()))));
+        onView(withId(R.id.lastUpdated)).check(matches(withText(userRepo.getUpdated_at())));
+        onView(withId(R.id.tvStars)).check(matches(withText(String.valueOf(userRepo.getStargazers_count()))));
+        onView(withId(R.id.tvForks)).check(matches(withText(String.valueOf(userRepo.getForks_count()))));
 
         // Check that back press closes the dialog
         Espresso.pressBack();

@@ -34,8 +34,8 @@ public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.RepoViewHolder
     public void onBindViewHolder(@NonNull RepoViewHolder holder, int position) {
 
         final UserReposItem currentRepo = userRepos.get(position);
-        holder.repo_title.setText(currentRepo.getName());
-        holder.repo_description.setText(currentRepo.getDescription());
+        holder.repoTitle.setText(currentRepo.getName());
+        holder.repoDescription.setText(currentRepo.getDescription());
 
         holder.itemView.setOnClickListener(v -> recyclerItemClickListener.onItemClick(currentRepo));
 
@@ -48,12 +48,12 @@ public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.RepoViewHolder
 
     static class RepoViewHolder extends RecyclerView.ViewHolder{
 
-        private TextView repo_title, repo_description;
+        private TextView repoTitle, repoDescription;
 
         RepoViewHolder(@NonNull View itemView) {
             super(itemView);
-            repo_title = itemView.findViewById(R.id.tv_repoTitle);
-            repo_description = itemView.findViewById(R.id.tv_repoDesc);
+            repoTitle = itemView.findViewById(R.id.tvRepoTitle);
+            repoDescription = itemView.findViewById(R.id.tvRepoDesc);
         }
     }
 

@@ -26,7 +26,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/last_updated"
+            android:id="@+id/lastUpdated"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -55,7 +55,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tv_stars"
+            android:id="@+id/tvStars"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -84,7 +84,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/tv_forks"
+            android:id="@+id/tvForks"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

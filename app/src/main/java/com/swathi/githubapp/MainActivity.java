@@ -1,19 +1,14 @@
 package com.swathi.githubapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.annotation.VisibleForTesting;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Dialog;
 import android.content.Context;
-import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -32,11 +27,6 @@ import com.swathi.githubapp.recyclerview.RecyclerItemClickListener;
 import com.swathi.githubapp.recyclerview.RepoAdapter;
 import com.swathi.githubapp.recyclerview.RepoBottomSheetDialog;
 
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
-
 public class MainActivity extends AppCompatActivity {
 
     @VisibleForTesting
@@ -48,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView userNameTV;
     private RecyclerView recyclerView;
     private RepoAdapter repoAdapter;
-    private ProgressBar progressBar_loadImage, progressBar_repoList;
+    private ProgressBar progressBarLoadImage, progressBarRepoList;
 
 
     @Override
@@ -83,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void updateUserReposList(UserRepos userReposItems) {
-        progressBar_repoList.setVisibility(View.GONE);
+        progressBarRepoList.setVisibility(View.GONE);
         if (userReposItems == null) {
             Toast.makeText(this, "Error in fetching user Repositories", Toast.LENGTH_LONG).show();
             return;
@@ -92,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateUserDetails(UserDetails userDetails) {
-        progressBar_loadImage.setVisibility(View.GONE);
+        progressBarLoadImage.setVisibility(View.GONE);
         if (userDetails == null) {
             Toast.makeText(this, "Error in fetching Avatar", Toast.LENGTH_LONG).show();
             return;
@@ -118,8 +108,8 @@ public class MainActivity extends AppCompatActivity {
                 imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
             }
 
-            progressBar_loadImage.setVisibility(View.VISIBLE);
-            progressBar_repoList.setVisibility(View.VISIBLE);
+            progressBarLoadImage.setVisibility(View.VISIBLE);
+            progressBarRepoList.setVisibility(View.VISIBLE);
 
             mainActivityViewModel.fetchUserDetails(userId);
             mainActivityViewModel.fetchUserRepos(userId);
@@ -130,9 +120,9 @@ public class MainActivity extends AppCompatActivity {
         searchBtn = findViewById(R.id.searchBtn);
         useridSearchET = findViewById(R.id.useridSearchET);
         userImage = findViewById(R.id.userImgView);
-        progressBar_loadImage = findViewById(R.id.progressbar_loadImage);
-        progressBar_repoList = findViewById(R.id.progressbar_repoList);
-        userNameTV = findViewById(R.id.tv_userName);
+        progressBarLoadImage = findViewById(R.id.progressbarLoadImage);
+        progressBarRepoList = findViewById(R.id.progressbarRepoList);
+        userNameTV = findViewById(R.id.tvUserName);
     }
 
     private void initializeRecyclerView() {
@@ -147,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onItemClick(UserReposItem reposItem) {
             Bundle bundle = new Bundle();
-            bundle.putString("last_updated", reposItem.component4());
+            bundle.putString("last_updated", reposItem.getUpdated_at());
             bundle.putString("stars", String.valueOf(reposItem.getStargazers_count()));
             bundle.putString("forks", String.valueOf(reposItem.getForks_count()));
             RepoBottomSheetDialog bottomSheetDialog = new RepoBottomSheetDialog();

@@ -10,15 +10,15 @@ import com.swathi.githubapp.network.GithubRepository;
 
 public class MainActivityViewModel extends ViewModel {
 
-    MutableLiveData<UserDetails> userDetailsLiveData = new MutableLiveData<>();
-    MutableLiveData<UserRepos> userReposLiveData = new MutableLiveData<>();
+    LiveData<UserDetails> userDetailsLiveData = new MutableLiveData<>();
+    LiveData<UserRepos> userReposLiveData = new MutableLiveData<>();
 
     void fetchUserDetails(String userId){
-        GithubRepository.getInstance().getUserDetails(userId,userDetailsLiveData);
+        GithubRepository.getInstance().getUserDetails(userId,(MutableLiveData<UserDetails>) userDetailsLiveData);
     }
 
     void fetchUserRepos(String userId){
-        GithubRepository.getInstance().getUserRepos(userId,userReposLiveData);
+        GithubRepository.getInstance().getUserRepos(userId,(MutableLiveData<UserRepos>)userReposLiveData);
     }
 
 }
